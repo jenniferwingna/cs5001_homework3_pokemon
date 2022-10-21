@@ -1,0 +1,233 @@
+"""
+Wingna Tsoi
+CS 5001
+Programming #3 Pokemon
+"""
+
+import random
+
+
+# Match the pokemon to specific number
+def get_player(num):
+    if num == 1:
+        return "Bulbasaur"
+    elif num == 2:
+        return "Charmander"
+    elif num == 3:
+        return "Butterfree"
+    elif num == 4:
+        return "Rattata"
+    elif num == 5:
+        return "Weedle"
+    elif num == 6:
+        return "Pikachu"
+    elif num == 7:
+        return "Sandslash"
+    elif num == 8:
+        return "Jigglypuff"
+    elif num == 9:
+        return "Raichu"
+    else:
+        # Diglett is regarded as default pokemon
+        return "Diglett"
+
+# determine who win the game
+# given that rock=1, paper=2 and scissors=3
+"""
+1 vs. 3: 1 wins.
+2 vs. 1: 2 wins.
+3 vs. 2: 3 wins.
+"""
+
+def check_battle(computer, player):
+    if computer == 1 and player == 2:
+        return "PLAYER"
+    elif computer == 1 and player == 1:
+        return "DRAW!"
+    elif computer == 1 and player == 3:
+        return "COMPUTER"
+
+    elif computer == 2 and player == 3:
+        return "PLAYER"
+    elif computer == 2 and player == 2:
+        return "DRAW!"
+    elif computer == 2 and player == 1:
+        return "COMPUTER"
+
+    elif computer == 3 and player == 3:
+        return "DRAW!"
+    elif computer == 3 and player == 2:
+        return "COMPUTER!"
+    else:
+        return "PLAYER"
+
+# convert rock, papaer and scissors to 1, 2 and 3 respectively
+def no_to_rps(rps):
+    if rps == 1:
+        return "Rock"
+    elif rps == 2:
+        return "Paper"
+    else:
+        return "Scissors"
+
+# as long as the program is run, at least one play is started
+no_of_play = 1
+
+# At the beginning, no matter which team player chooses,
+# both the computer and player win no game.
+# Thus, both of them start with 0
+player_red_win = 0
+player_blue_win = 0
+pc_red_win = 0
+pc_blue_win = 0
+
+# num equal to the number that assign to the pokemon
+# since it's randomly chosen for both pc and player
+# thus, select a random number in between 0 to 20.
+# nummer>=10 equal to default value
+red_num = int(random.randint(0, 20))
+blue_num = int(random.randint(0, 20))
+
+# call the get_player function to assign a pokemon for pc and player
+red_pokemon = get_player(red_num)
+blue_pokemon = get_player(blue_num)
+
+# ask player to choose bwtween red and blue team
+choose_team = str(input("What team do you want (red or blue)?"))
+print("RED pokemon " + red_pokemon + "vs. BLUE pokemon " + blue_pokemon)
+
+# ask the player to enter his/her RPS choice
+players_rps_choice = \
+    int(input("Enter 1 for Rock, 2 for Paper, 3 for Scissors"))
+
+# assign a random choice for pc
+pc_rps_choice = random.randint(1, 3)
+
+# if player chooses red team,
+# then pc will be coaching blue team, vice versa
+if choose_team == "red":
+    print(red_pokemon + " played " + no_to_rps(players_rps_choice)
+          + ". " + blue_pokemon + " played " + no_to_rps(pc_rps_choice))
+elif choose_team == "blue":
+    print(red_pokemon + " played " + no_to_rps(pc_rps_choice) +
+          ". " + blue_pokemon + " played " + no_to_rps(players_rps_choice))
+else:
+    "Error. You can only choose between red and blue team."
+
+"""
+To check the result of the battle and who win it
+~if pc wins, then add 1 to the variable pc_red_win or pc_blue_win 
+depending on which team doespc belongs to
+~if player wins, then add 1 to 
+the variable player_red_win or player_blue_win 
+depending on which team does player belongs to
+"""
+
+if check_battle(pc_rps_choice, players_rps_choice) == "PLAYER" \
+        and choose_team == "red":
+    player_red_win += 1
+    print("My RED teams wins with " + red_pokemon + ".")
+elif check_battle(pc_rps_choice, players_rps_choice) == "PLAYER" \
+        and choose_team == "blue":
+    player_blue_win += 1
+    print("My BLUE teams wins with " + blue_pokemon + ".")
+elif check_battle(pc_rps_choice, players_rps_choice) == "DRAW!" \
+        and choose_team == "red":
+    print("It is a draw. No winner")
+elif check_battle(pc_rps_choice, players_rps_choice) == "DRAW!" \
+        and choose_team == "blue":
+    print("It is a draw. No winner")
+elif check_battle(pc_rps_choice, players_rps_choice) == "COMPUTER" \
+        and choose_team == "red":
+    pc_blue_win += 1
+    print("Oh! I'm defeated")
+else:
+    pc_red_win += 1
+    print("Oh! I'm defeated")
+
+# ask player whether he/she want to play again
+continue_gaming = input("Play again (y/n)?")
+
+# if player wants to play again,
+# assign new random number for choosing pokemon
+while continue_gaming == "y":
+    red_num = random.randint(0, 20)
+    blue_num = random.randint(0, 20)
+    red_pokemon = get_player(red_num)
+    blue_pokemon = get_player(blue_num)
+    print("RED pokemon " + red_pokemon +
+          " vs. BLUE pokemon " + blue_pokemon)
+
+    # assign new random number for choosing rps choice for pc
+    players_rps_choice = int(input(
+        "Enter 1 for Rock, 2 for Paper, "
+        "3 for Scissors"))
+    pc_rps_choice = random.randint(1, 3)
+
+    if choose_team == "red":
+        print(red_pokemon + " played " +
+              no_to_rps(players_rps_choice) +
+              ". " + blue_pokemon + " played " +
+              no_to_rps(pc_rps_choice))
+    elif choose_team == "blue":
+        print(red_pokemon + " played " +
+              no_to_rps(pc_rps_choice) +
+              ". " + blue_pokemon + " played " +
+              no_to_rps(players_rps_choice))
+    else:
+        "Error. You can only choose between red and blue team."
+
+    if check_battle(pc_rps_choice, players_rps_choice) == "PLAYER" \
+            and choose_team == "red":
+        player_red_win += 1
+        print("My RED teams wins with " + red_pokemon + ".")
+    elif check_battle(pc_rps_choice, players_rps_choice) == "PLAYER" \
+            and choose_team == "blue":
+        player_blue_win += 1
+        print("My BLUE teams wins with " + blue_pokemon + ".")
+    elif check_battle(pc_rps_choice, players_rps_choice) == "DRAW!" \
+            and choose_team == "red":
+        print("It is a draw. No winner")
+    elif check_battle(pc_rps_choice, players_rps_choice) == "DRAW!" \
+            and choose_team == "blue":
+        print("It is a draw. No winner")
+    elif check_battle(pc_rps_choice, players_rps_choice) == "COMPUTER" \
+            and choose_team == "red":
+        pc_blue_win += 1
+        print("Oh! I'm defeated")
+    else:
+        print("Oh! I'm defeated")
+        pc_red_win += 1
+
+    no_of_play = no_of_play + 1
+    continue_gaming = input("Play again (y/n)?")
+
+print("Tournament has ended!")
+
+# Player choose to stop the game
+# Thus, calculate the total no. of win for both pc and player
+if choose_team == "red":
+    print("RED team: " + str(player_red_win)
+          + "    BLUE team: " + str(pc_blue_win))
+elif choose_team == "blue":
+    print("RED team: " + str(pc_red_win)
+          + "    BLUE team: " + str(player_blue_win))
+else:
+    print("ERROR")
+
+if choose_team == "red":
+    if player_red_win > pc_blue_win:
+        print("I WIN !")
+    elif pc_blue_win > player_red_win:
+        print("I LOSE !")
+    else:
+        "DRAW!"
+elif choose_team == "blue":
+    if player_blue_win > pc_red_win:
+        print("I WIN !")
+    elif pc_red_win > player_blue_win:
+        print("I LOSE !")
+    else:
+        print("DRAW!")
+else:
+    print("error")
