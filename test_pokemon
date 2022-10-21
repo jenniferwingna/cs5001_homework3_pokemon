@@ -1,0 +1,104 @@
+"""
+Wingna Tsoi
+CS 5001
+Programming #2 TEST
+"""
+
+
+def get_player(num):
+    if num == 1:
+        return "Bulbasaur"
+    elif num == 2:
+        return "Charmander"
+    elif num == 3:
+        return "Butterfree"
+    elif num == 4:
+        return "Rattata"
+    elif num == 5:
+        return "Weedle"
+    elif num == 6:
+        return "Pikachu"
+    elif num == 7:
+        return "Sandslash"
+    elif num == 8:
+        return "Jigglypuff"
+    elif num == 9:
+        return "Raichu"
+    else:
+        return "Diglett"
+
+
+def check_battle(computer, player):
+    if computer == 1 and player == 2:
+        return "PLAYER"
+    elif computer == 1 and player == 1:
+        return "DRAW!"
+    elif computer == 1 and player == 3:
+        return "COMPUTER"
+
+    elif computer == 2 and player == 3:
+        return "PLAYER"
+    elif computer == 2 and player == 2:
+        return "DRAW!"
+    elif computer == 2 and player == 1:
+        return "COMPUTER"
+
+    elif computer == 3 and player == 3:
+        return "DRAW!"
+    elif computer == 3 and player == 2:
+        return "COMPUTER!"
+    else:
+        return "PLAYER"
+
+
+def test_get_player(num, expect):
+    """
+    Test 1:
+    :param num: 1
+    :param expect: Bulbasaur
+
+    Test 2:
+    :param num: 2
+    :param expect: Charmander
+
+    Test 3:
+    :param num: 20
+    :param expect: Diglett
+
+    """
+    result = get_player(num)
+    print("result = " + result + "  expected = " + expect)
+
+
+def test_check_battle(computer, player, expect):
+    """
+    Test 1
+    :param computer: 1 RPS
+    :param player: 2
+    :param expect: PLAYER
+
+    Test 2
+    :param computer:3
+    :param player:2
+    :param expect: COMPUTER
+
+    Test 3
+    :param computer:1
+    :param player:1
+    :param expect:DRAW!
+    """
+    result = check_battle(computer, player)
+    print("result = " + result + "  expected = " + expect)
+
+
+def main():
+    test_get_player(2, "Charmander")
+    test_get_player(1, "Bulbasaur")
+    test_get_player(20, "Diglett")
+    test_check_battle(1, 2, "PLAYER")
+    test_check_battle(3, 2, "COMPUTER")
+    test_check_battle(1, 1, "DRAW!")
+
+
+if __name__ == '__main__':
+    main()
