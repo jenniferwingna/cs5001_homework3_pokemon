@@ -5,27 +5,32 @@ Programming #2 TEST
 """
 
 
+# Match the pokemon to specific number
 def get_player(num):
-    if num == 1:
-        return "Bulbasaur"
-    elif num == 2:
-        return "Charmander"
-    elif num == 3:
-        return "Butterfree"
-    elif num == 4:
-        return "Rattata"
-    elif num == 5:
-        return "Weedle"
-    elif num == 6:
-        return "Pikachu"
-    elif num == 7:
-        return "Sandslash"
-    elif num == 8:
-        return "Jigglypuff"
-    elif num == 9:
-        return "Raichu"
+    if isinstance(num,int):
+        if num == 1:
+            return "Bulbasaur"
+        elif num == 2:
+            return "Charmander"
+        elif num == 3:
+            return "Butterfree"
+        elif num == 4:
+            return "Rattata"
+        elif num == 5:
+            return "Weedle"
+        elif num == 6:
+            return "Pikachu"
+        elif num == 7:
+            return "Sandslash"
+        elif num == 8:
+            return "Jigglypuff"
+        elif num == 9:
+            return "Raichu"
+        else:
+            # Diglett is regarded as default pokemon
+            return "Diglett"
     else:
-        return "Diglett"
+        return False
 
 
 def check_battle(computer, player):
@@ -67,7 +72,7 @@ def test_get_player(num, expect):
 
     """
     result = get_player(num)
-    print("result = " + result + "  expected = " + expect)
+    print("result = " + str(result) + "  expected = " + expect)
 
 
 def test_check_battle(computer, player, expect):
@@ -92,7 +97,7 @@ def test_check_battle(computer, player, expect):
 
 
 def main():
-    test_get_player(2, "Charmander")
+    test_get_player("e", "False")
     test_get_player(1, "Bulbasaur")
     test_get_player(20, "Diglett")
     test_check_battle(1, 2, "PLAYER")
