@@ -4,56 +4,7 @@ CS 5001
 Programming #2 TEST
 """
 
-
-# Match the pokemon to specific number
-def get_player(num):
-    if isinstance(num,int):
-        if num == 1:
-            return "Bulbasaur"
-        elif num == 2:
-            return "Charmander"
-        elif num == 3:
-            return "Butterfree"
-        elif num == 4:
-            return "Rattata"
-        elif num == 5:
-            return "Weedle"
-        elif num == 6:
-            return "Pikachu"
-        elif num == 7:
-            return "Sandslash"
-        elif num == 8:
-            return "Jigglypuff"
-        elif num == 9:
-            return "Raichu"
-        else:
-            # Diglett is regarded as default pokemon
-            return "Diglett"
-    else:
-        return False
-
-
-def check_battle(computer, player):
-    if computer == 1 and player == 2:
-        return "PLAYER"
-    elif computer == 1 and player == 1:
-        return "DRAW!"
-    elif computer == 1 and player == 3:
-        return "COMPUTER"
-
-    elif computer == 2 and player == 3:
-        return "PLAYER"
-    elif computer == 2 and player == 2:
-        return "DRAW!"
-    elif computer == 2 and player == 1:
-        return "COMPUTER"
-
-    elif computer == 3 and player == 3:
-        return "DRAW!"
-    elif computer == 3 and player == 2:
-        return "COMPUTER!"
-    else:
-        return "PLAYER"
+import pokemon
 
 
 def test_get_player(num, expect):
@@ -71,7 +22,7 @@ def test_get_player(num, expect):
     :param expect: Diglett
 
     """
-    result = get_player(num)
+    result = pokemon.get_player(num)
     print("result = " + str(result) + "  expected = " + expect)
 
 
@@ -92,7 +43,7 @@ def test_check_battle(computer, player, expect):
     :param player:1
     :param expect:DRAW!
     """
-    result = check_battle(computer, player)
+    result = pokemon.check_battle(computer, player)
     print("result = " + result + "  expected = " + expect)
 
 
